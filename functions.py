@@ -83,3 +83,11 @@ def additionnerHaut(tab):
                     _verificationHaut(tab, colonne)
                     break
     return tab
+
+def verificationScore(tab):
+    resultat = False
+    for i in range(len(tab)):
+        for j in range(len(tab[i])):
+            if tab[i][j] == 2048:
+                resultat = True
+                return resultat
