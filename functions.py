@@ -34,32 +34,38 @@ def additionnerGauche(tab):
                     break
     return tab
 
-matrice = [
-    [0, 2, 0, 2],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0]
-]
+def additionnerBas(tab):
+    for colonne in range(len(tab)):
+        for ligne in range(len(tab)-1, 0, -1):
+            if tab[ligne][colonne] == 0:
+                for k in range(ligne-1, -1, -1):
+                    if tab[k][colonne] != 0:
+                        tab[ligne][colonne] = tab[k][colonne]
+                        tab[k][colonne] = 0
+                        break
 
-print(matrice)
-matrice = additionnerGauche(matrice)
-print(matrice)
+        for ligne in range(len(tab)-1):
+            if tab[ligne][colonne] != 0:
+                if tab[ligne][colonne] == tab[ligne+1][colonne]:
+                    tab[ligne+1][colonne] = tab[ligne][colonne] * 2
+                    tab[ligne][colonne] = 0
+                    break
+    return tab
 
-# def additionnerBas(tab):
-#     for colonne in range(len(tab)):
-#         for ligne in range(len(tab)-1):
-#             if tab[ligne][colonne] != 0:
-#                 if tab[ligne][colonne] == tab[ligne+1][colonne]:
-#                     tab[ligne+1][colonne] = tab[ligne][colonne] * 2
-#                     tab[ligne][colonne] = 0
-#     return tab
-# 
-# 
-# def additionnerHaut(tab):
-#     for colonne in range(len(tab)-1, -1, -1):
-#         for ligne in range(len(tab)-1, 0, -1):
-#             if tab[ligne][colonne] != 0:
-#                 if tab[ligne][colonne] == tab[ligne-1][colonne]:
-#                     tab[ligne-1][colonne] = tab[ligne][colonne] * 2
-#                     tab[ligne][colonne] = 0
-#     return tab
+def additionnerHaut(tab):
+    for colonne in range(len(tab)):
+        for ligne in range(len(tab)):
+            if tab[ligne][colonne] == 0:
+                for k in range(ligne, len(tab)):
+                    if tab[k][colonne] != 0:
+                        tab[ligne][colonne] = tab[k][colonne]
+                        tab[k][colonne] = 0
+                        break
+
+        for ligne in range(len(tab)-1, 0, -1):
+            if tab[ligne][colonne] != 0:
+                if tab[ligne][colonne] == tab[ligne-1][colonne]:
+                    tab[ligne-1][colonne] = tab[ligne][colonne] * 2
+                    tab[ligne][colonne] = 0
+                    break
+    return tab
