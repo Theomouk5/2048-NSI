@@ -1,5 +1,6 @@
 import random
 import tkinter as tk
+from tkinter import messagebox
 
 def _verificationDroite(tab, ligne):
     for colonne in range(len(tab[ligne])-1, -1, -1):
@@ -116,22 +117,11 @@ def touche(event):
     
     ajouter_nombre(matrice)
     afficher_matrice(matrice)
+    
+    
     if jeu_terminer(matrice):
         return
-def jeu_terminer(tab):
-    for i in range(4):
-        for j in range(4):
-            if tab[i][j]==0:
-                return False
-    for i in range(4):
-        for j in range(4):
-            if j<3 and tab[i][j]==tab[i][j+1]:
-                return False
-            if i<3 and tab[i][j]==tab[i+1][j]:
-                return False
-    messagebox.showinfo("ta perdue")
-    return True
-    
+
 def ajouter_nombre(matrice):
         case_vide=[]
         for i in range(4):
@@ -151,6 +141,19 @@ def commencer_jeu(frame_menu):
     afficher_matrice(matrice)
     fenetre.bind("<Key>", touche)
 
+def jeu_terminer(tab):
+    for i in range(4):
+        for j in range(4):
+            if tab[i][j]==0:
+                return False
+    for i in range(4):
+        for j in range(4):
+            if j<3 and tab[i][j]==tab[i][j+1]:
+                return False
+            if i<3 and tab[i][j]==tab[i+1][j]:
+                return False
+    messagebox.showinfo("ta perdue")
+    return True
         
 def afficher_matrice(matrice):
     for i in range(4):
@@ -171,6 +174,21 @@ def nouvelle_partie():
 
 def quitter():
     fenetre.destroy()
+couleur_liste = [
+    "#cdc1b4",  
+    "#eee4da",  
+    "#ede0c8",  
+    "#f2b179",  
+    "#f59563",  
+    "#f67c5f",  
+    "#f65e3b",  
+    "#edcf72",  
+    "#edcc61",  
+    "#edc850",  
+    "#edc53f",  
+    "#edc22e",  
+    "#3c3a32"   
+]
 
 def creer_grille():
     global grille
@@ -184,8 +202,11 @@ def creer_grille():
                 width=6,
                 height=3,
                 font=("Arial", 24),
-                borderwidth=2,
-                relief="solid"
+                borderwidth=4,
+                relief="solid",
+                bg="#cdc1b4",
+                fg="#3c3a32"
+
             )
             case.grid(row=ligne, column=colonne, padx=5, pady=5)
             ligne_cases.append(case)
@@ -215,4 +236,3 @@ btn_quitter = tk.Button(menu_accueil, text="Quitter", font=("Arial", 24),command
 btn_quitter.pack(pady=10)
 
 fenetre.mainloop()   
-
