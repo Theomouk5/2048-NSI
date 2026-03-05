@@ -116,7 +116,22 @@ def touche(event):
     
     ajouter_nombre(matrice)
     afficher_matrice(matrice)
-
+    if jeu_terminer(matrice):
+        return
+def jeu_terminer(tab):
+    for i in range(4):
+        for j in range(4):
+            if tab[i][j]==0:
+                return False
+    for i in range(4):
+        for j in range(4):
+            if j<3 and tab[i][j]==tab[i][j+1]:
+                return False
+            if i<3 and tab[i][j]==tab[i+1][j]:
+                return False
+    messagebox.showinfo("ta perdue")
+    return True
+    
 def ajouter_nombre(matrice):
         case_vide=[]
         for i in range(4):
