@@ -1,5 +1,6 @@
 import random
 import tkinter as tk
+from functions import *
 
 matrice = [
     [0,0,0,0],
@@ -17,9 +18,9 @@ def touche(event):
         additionnerHaut(matrice)
     elif event.keysym=="Down":
         additionnerBas(matrice)
-    
     ajouter_nombre(matrice)
     afficher_matrice(matrice)
+    print(matrice)
 
 def ajouter_nombre(matrice):
         case_vide=[]
