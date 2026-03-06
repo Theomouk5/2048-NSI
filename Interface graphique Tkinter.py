@@ -2,6 +2,7 @@ import random
 import tkinter as tk
 from tkinter import messagebox
 
+# Fonction qui sert à pousser tout nombre != 0 à droite
 def _verificationDroite(tab, ligne):
     for colonne in range(len(tab[ligne])-1, -1, -1):
         if tab[ligne][colonne] == 0:
@@ -11,6 +12,7 @@ def _verificationDroite(tab, ligne):
                     tab[ligne][k] = 0
                     break
 
+# Fonction qui sert à pousser tout nombre != 0 à gauche 
 def _verificationGauche(tab, ligne):
     for colonne in range(len(tab[ligne])):
         if tab[ligne][colonne] == 0:
@@ -20,6 +22,7 @@ def _verificationGauche(tab, ligne):
                     tab[ligne][k] = 0
                     break
 
+# Fonction qui sert à pousser tout nombre != 0 en bas
 def _verificationBas(tab, colonne):
     for ligne in range(len(tab)-1, 0, -1):
         if tab[ligne][colonne] == 0:
@@ -29,6 +32,7 @@ def _verificationBas(tab, colonne):
                     tab[k][colonne] = 0
                     break
 
+# Fonction qui sert à pousser tout nombre != 0 en haut
 def _verificationHaut(tab, colonne):
     for ligne in range(len(tab)):
         if tab[ligne][colonne] == 0:
@@ -39,7 +43,7 @@ def _verificationHaut(tab, colonne):
                     break
 
 
-
+# Pousser tout nombre à droite et les additionnés de gauche à droite
 def additionnerDroite(tab):
     for ligne in range(len(tab)):
         _verificationDroite(tab, ligne) 
@@ -52,6 +56,7 @@ def additionnerDroite(tab):
                     break
     return tab
 
+# Pousser tout nombre à gauche et les additionnés de droite à gauche
 def additionnerGauche(tab):
     for ligne in range(len(tab)):
         _verificationGauche(tab, ligne)
@@ -64,6 +69,7 @@ def additionnerGauche(tab):
                     break
     return tab
 
+# Pousser tout nombre en bas et les additionnés de haut en bas
 def additionnerBas(tab):
     for colonne in range(len(tab)):
         _verificationBas(tab, colonne)
@@ -76,6 +82,7 @@ def additionnerBas(tab):
                     break
     return tab
 
+# Pousser tout nombre en haut et les additionnés de bas en haut
 def additionnerHaut(tab):
     for colonne in range(len(tab)):
         _verificationHaut(tab, colonne)
@@ -88,6 +95,7 @@ def additionnerHaut(tab):
                     break
     return tab
 
+# Vérifie si une case = 2048
 def verificationScore(tab):
     resultat = False
     for i in range(len(tab)):
@@ -97,13 +105,6 @@ def verificationScore(tab):
                 return resultat
 
 
-
-matrice = [
-    [0,0,0,0],
-    [0,0,0,0],
-    [0,0,0,0],
-    [0,0,0,0]
-]
 
 def touche(event):
     if event.keysym=="Right":
@@ -161,9 +162,14 @@ def afficher_matrice(matrice):
             valeur=matrice[i][j]
             if valeur==0:
                 grille[i][j]["text"]=""
+                grille[i][j]["bg"]="#cdc1b4",
             else:
                 grille[i][j]["text"]=str(valeur)
-
+                accumulateur = 2
+                for k in range(0, 12):
+                    if valeur == 2**k:
+                        grille[i][j]["bg"]=couleur_liste[k]
+            
 def nouvelle_partie():
     for i in range(4):
         for j in range(4):
@@ -174,6 +180,15 @@ def nouvelle_partie():
 
 def quitter():
     fenetre.destroy()
+
+
+matrice = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0]
+]
+
 couleur_liste = [
     "#cdc1b4",  
     "#eee4da",  
@@ -184,10 +199,9 @@ couleur_liste = [
     "#f65e3b",  
     "#edcf72",  
     "#edcc61",  
-    "#edc850",  
-    "#edc53f",  
-    "#edc22e",  
-    "#3c3a32"   
+    "#edc850",
+    "#CCF527",
+    "#68F527"
 ]
 
 def creer_grille():
@@ -236,3 +250,4 @@ btn_quitter = tk.Button(menu_accueil, text="Quitter", font=("Arial", 24),command
 btn_quitter.pack(pady=10)
 
 fenetre.mainloop()   
+
