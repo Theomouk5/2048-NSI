@@ -31,6 +31,7 @@ def _verificationBas(tab, colonne):
                     tab[ligne][colonne] = tab[k][colonne]
                     tab[k][colonne] = 0
                     break
+                
 
 # Fonction qui sert à pousser tout nombre != 0 en haut
 def _verificationHaut(tab, colonne):
@@ -112,13 +113,6 @@ matrice = [
     [0, 0, 0, 0, 0]
 ]
 
-def score():
-    a=0
-    for i in range(len(matrice)):
-        for j in range(len(matrice[i])):
-            a=a+matrice[i][j]
-    return a
-
 def touche(event):
     if event.keysym=="Right":
         additionnerDroite(matrice) 
@@ -147,16 +141,42 @@ def ajouter_nombre(matrice, taille):
         ligne, colonne= random.choice(case_vide)
         matrice[ligne][colonne]=2
 
+
 def commencer_jeu(frame_menu):
     global frame_grille
     frame_menu.destroy()   
     frame_grille=tk.Frame(fenetre)
+    barre_bouton.pack(pady=10)
+
+    btn_nouvelle=tk.Button(
+        barre_bouton,
+        text="Nouvelle partie",
+        font=("Arial",14),
+        command=nouvelle_partie,
+        bg="#8f7a66",
+        fg="white",
+        padx=10,
+        pady=5
+        )
+    btn_nouvelle.pack(side="left", padx=10)
+    btn_quitter=tk.Button(
+        barre_bouton,
+        text="Quitter",
+        font=("Arial",14),
+        command=quitter,
+        bg="#8f7a66",
+        fg="white",
+        padx=10,
+        pady=5
+        )
+    btn_quitter.pack(side="left", padx=10)
     frame_grille.pack()
     creer_grille(frame_grille, len(matrice))         
     ajouter_nombre(matrice, len(matrice))
     ajouter_nombre(matrice, len(matrice))
     afficher_matrice(matrice, len(matrice))
     fenetre.bind("<Key>", touche)
+    
 
 def jeu_terminer(tab, taille):
     for i in range(taille):
@@ -185,7 +205,6 @@ def afficher_matrice(matrice, taille):
                 for k in range(0, 12):
                     if valeur == 2**k:
                         grille[i][j]["bg"]=couleur_liste[k]
-    score_label.config(text="Score : " + str(score()))
             
 def nouvelle_partie():
     for i in range(len(matrice)):
@@ -216,8 +235,6 @@ couleur_liste = [
 def creer_grille(parent_frame, taille):
     global grille
     grille = []
-    score_label = tk.Label(fenetre, text="Score : 0", font=("Arial",16))
-    score_label.grid(row=0,column=0,columnspan=4,pady=10)
     for ligne in range(taille):
         ligne_cases = []
         for colonne in range(taille):
@@ -240,30 +257,7 @@ def creer_grille(parent_frame, taille):
 fenetre = tk.Tk()
 fenetre.title("2048")
 barre_bouton=tk.Frame(fenetre)
-barre_bouton.pack(pady=10)
 
-btn_nouvelle=tk.Button(
-    barre_bouton,
-    text="Nouvelle partie",
-    font=("Arial",14),
-    command=nouvelle_partie,
-    bg="#8f7a66",
-    fg="white",
-    padx=10,
-    pady=5
-)
-btn_nouvelle.pack(side="left", padx=10)
-btn_quitter=tk.Button(
-    barre_bouton,
-    text="Quitter",
-    font=("Arial",14),
-    command=quitter,
-    bg="#8f7a66",
-    fg="white",
-    padx=10,
-    pady=5
-)
-btn_quitter.pack(side="left", padx=10)
 
 menu_accueil = tk.Frame(fenetre)
 menu_accueil.pack(expand=True)
