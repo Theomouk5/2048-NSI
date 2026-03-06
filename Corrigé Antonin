@@ -150,9 +150,9 @@ def ajouter_nombre(matrice, taille):
 def commencer_jeu(frame_menu):
     global frame_grille
     frame_menu.destroy()   
-    frame_grille=tk.Frame(fenetre)
+    frame_grille=tk.Frame(fenetre, bg="#bbada0")
     barre_bouton.pack(pady=10)
-
+    
     btn_nouvelle=tk.Button(
         barre_bouton,
     text="Nouvelle partie",
@@ -202,7 +202,7 @@ def afficher_matrice(matrice, taille):
             valeur=matrice[i][j]
             if valeur==0:
                 grille[i][j]["text"]=""
-                grille[i][j]["bg"]="#cdc1b4",
+                grille[i][j]["bg"]="#faf8ef",
             else:
                 grille[i][j]["text"]=str(valeur)
                 accumulateur = 2
@@ -253,7 +253,7 @@ def creer_grille(parent_frame, taille):
                 font=("Arial", 24),
                 borderwidth=4,
                 relief="solid",
-                bg="#cdc1b4",
+                bg="#faf8ef",
                 fg="#3c3a32"
 
             )
