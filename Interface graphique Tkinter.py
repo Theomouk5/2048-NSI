@@ -216,21 +216,23 @@ def nouvelle_partie():
 
 def quitter():
     fenetre.destroy()
+
+
 couleur_liste = [
-    "#cdc1b4",  
-    "#eee4da",  
-    "#ede0c8",  
-    "#f2b179",  
-    "#f59563",  
-    "#f67c5f",  
-    "#f65e3b",  
-    "#edcf72",  
-    "#edcc61",  
-    "#edc850",  
-    "#edc53f",  
-    "#edc22e",  
-    "#3c3a32"   
+    "#CDC1B4",
+    "#EEE4DA",
+    "#EDE0C8",
+    "#F2B179",
+    "#F59563",
+    "#F67C5F",
+    "#F65E3B",
+    "#EDCF72",
+    "#EDCC61",
+    "#EDC850",
+    "#CCF527",
+    "#68F527"
 ]
+
 
 def creer_grille(parent_frame, taille):
     global grille
