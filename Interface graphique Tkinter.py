@@ -104,7 +104,13 @@ def verificationScore(tab):
                 resultat = True
                 return resultat
 
-
+matrice = [
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0]
+]
 
 def touche(event):
     if event.keysym=="Right":
@@ -135,8 +141,11 @@ def ajouter_nombre(matrice, taille):
         matrice[ligne][colonne]=2
 
 def commencer_jeu(frame_menu):
+    global frame_grille
     frame_menu.destroy()   
-    creer_grille(len(matrice))         
+    frame_grille=tk.Frame(fenetre)
+    frame_grille.pack()
+    creer_grille(frame_grille, len(matrice))         
     ajouter_nombre(matrice, len(matrice))
     ajouter_nombre(matrice, len(matrice))
     afficher_matrice(matrice, len(matrice))
@@ -180,16 +189,6 @@ def nouvelle_partie():
 
 def quitter():
     fenetre.destroy()
-
-
-matrice = [
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0]
-]
-
 couleur_liste = [
     "#cdc1b4",  
     "#eee4da",  
@@ -200,19 +199,20 @@ couleur_liste = [
     "#f65e3b",  
     "#edcf72",  
     "#edcc61",  
-    "#edc850",
-    "#CCF527",
-    "#68F527"
+    "#edc850",  
+    "#edc53f",  
+    "#edc22e",  
+    "#3c3a32"   
 ]
 
-def creer_grille(taille):
+def creer_grille(parent_frame, taille):
     global grille
     grille = []
     for ligne in range(taille):
         ligne_cases = []
         for colonne in range(taille):
             case = tk.Label(
-                fenetre,
+                parent_frame,
                 text="",
                 width=6,
                 height=3,
@@ -229,14 +229,31 @@ def creer_grille(taille):
 
 fenetre = tk.Tk()
 fenetre.title("2048")
+barre_bouton=tk.Frame(fenetre)
+barre_bouton.pack(pady=10)
 
-menu_principal=tk.Menu(fenetre)
-fenetre.config(menu=menu_principal)
-menu_jeu=tk.Menu(menu_principal,tearoff=0)
-menu_jeu.add_command(label="Nouvelle partie", command=nouvelle_partie)
-menu_jeu.add_command(label="Quitter", command=quitter)
-menu_principal.add_cascade(label="Jeu", menu=menu_jeu)
-
+btn_nouvelle=tk.Button(
+    barre_bouton,
+    text="Nouvelle partie",
+    font=("Arial",14),
+    command=nouvelle_partie,
+    bg="#8f7a66",
+    fg="white",
+    padx=10,
+    pady=5
+)
+btn_nouvelle.pack(side="left", padx=10)
+btn_quitter=tk.Button(
+    barre_bouton,
+    text="Quitter",
+    font=("Arial",14),
+    command=quitter,
+    bg="#8f7a66",
+    fg="white",
+    padx=10,
+    pady=5
+)
+btn_quitter.pack(side="left", padx=10)
 
 menu_accueil = tk.Frame(fenetre)
 menu_accueil.pack(expand=True)
