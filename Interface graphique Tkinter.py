@@ -116,17 +116,17 @@ def touche(event):
     elif event.keysym=="Down":
         additionnerBas(matrice)
     
-    ajouter_nombre(matrice)
-    afficher_matrice(matrice)
+    ajouter_nombre(matrice, len(matrice))
+    afficher_matrice(matrice, len(matrice))
     
     
-    if jeu_terminer(matrice):
+    if jeu_terminer(matrice, len(matrice)):
         return
 
-def ajouter_nombre(matrice):
+def ajouter_nombre(matrice, taille):
         case_vide=[]
-        for i in range(4):
-            for j in range(4):
+        for i in range(taille):
+            for j in range(taille):
                 if matrice[i][j]==0:
                     case_vide.append((i,j))
         if not case_vide:
@@ -136,29 +136,29 @@ def ajouter_nombre(matrice):
 
 def commencer_jeu(frame_menu):
     frame_menu.destroy()   
-    creer_grille()         
-    ajouter_nombre(matrice)
-    ajouter_nombre(matrice)
-    afficher_matrice(matrice)
+    creer_grille(len(matrice))         
+    ajouter_nombre(matrice, len(matrice))
+    ajouter_nombre(matrice, len(matrice))
+    afficher_matrice(matrice, len(matrice))
     fenetre.bind("<Key>", touche)
 
-def jeu_terminer(tab):
-    for i in range(4):
-        for j in range(4):
+def jeu_terminer(tab, taille):
+    for i in range(taille):
+        for j in range(taille):
             if tab[i][j]==0:
                 return False
-    for i in range(4):
-        for j in range(4):
-            if j<3 and tab[i][j]==tab[i][j+1]:
+    for i in range(taille):
+        for j in range(taille):
+            if j < (taille-1) and tab[i][j]==tab[i][j+1]:
                 return False
-            if i<3 and tab[i][j]==tab[i+1][j]:
+            if i < (taille-1) and tab[i][j]==tab[i+1][j]:
                 return False
     messagebox.showinfo("ta perdue")
     return True
         
-def afficher_matrice(matrice):
-    for i in range(4):
-        for j in range(4):
+def afficher_matrice(matrice, taille):
+    for i in range(taille):
+        for j in range(taille):
             valeur=matrice[i][j]
             if valeur==0:
                 grille[i][j]["text"]=""
@@ -171,22 +171,23 @@ def afficher_matrice(matrice):
                         grille[i][j]["bg"]=couleur_liste[k]
             
 def nouvelle_partie():
-    for i in range(4):
-        for j in range(4):
+    for i in range(len(matrice)):
+        for j in range(len(matrice)):
             matrice[i][j]=0
-    ajouter_nombre(matrice)
-    ajouter_nombre(matrice)
-    afficher_matrice(matrice)
+    ajouter_nombre(matrice, len(matrice))
+    ajouter_nombre(matrice, len(matrice))
+    afficher_matrice(matrice, len(matrice))
 
 def quitter():
     fenetre.destroy()
 
 
 matrice = [
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0]
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0]
 ]
 
 couleur_liste = [
@@ -204,12 +205,12 @@ couleur_liste = [
     "#68F527"
 ]
 
-def creer_grille():
+def creer_grille(taille):
     global grille
     grille = []
-    for ligne in range(4):
+    for ligne in range(taille):
         ligne_cases = []
-        for colonne in range(4):
+        for colonne in range(taille):
             case = tk.Label(
                 fenetre,
                 text="",
@@ -250,4 +251,3 @@ btn_quitter = tk.Button(menu_accueil, text="Quitter", font=("Arial", 24),command
 btn_quitter.pack(pady=10)
 
 fenetre.mainloop()   
-
