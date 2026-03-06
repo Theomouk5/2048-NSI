@@ -208,7 +208,7 @@ def afficher_matrice(matrice, taille):
                 accumulateur = 2
                 for k in range(0, 12):
                     if valeur == 2**k:
-                        grille[i][j]["bg"]=couleur_liste[k]
+                        grille[i][j]["bg"]=couleur_liste[k+1]
     score_label.config(text="Score : " + str(score()))
             
 def nouvelle_partie():
@@ -234,7 +234,7 @@ couleur_liste = [
     "#edc850",  
     "#edc53f",  
     "#edc22e",  
-    "#3c3a32"   
+    "#00FF73"   
 ]
 
 def creer_grille(parent_frame, taille):
