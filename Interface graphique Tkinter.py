@@ -112,6 +112,13 @@ matrice = [
     [0, 0, 0, 0]
 ]
 
+def score():
+    a=0
+    for i in range(len(matrice)):
+        for j in range(len(matrice[i])):
+            a=a+matrice[i][j]
+    return a
+
 def touche(event):
     if event.keysym=="Right":
         additionnerDroite(matrice) 
@@ -204,6 +211,7 @@ def afficher_matrice(matrice, taille):
                 for k in range(0, 12):
                     if valeur == 2**k:
                         grille[i][j]["bg"]=couleur_liste[k]
+    score_label.config(text="Score : " + str(score()))
             
 def nouvelle_partie():
     for i in range(len(matrice)):
@@ -234,8 +242,10 @@ couleur_liste = [
 
 
 def creer_grille(parent_frame, taille):
-    global grille
+    global grille, score_label
     grille = []
+    score_label = tk.Label(fenetre, text="Score : 0", font=("Arial",16))
+    score_label.pack(pady=5)
     for ligne in range(taille):
         ligne_cases = []
         for colonne in range(taille):
