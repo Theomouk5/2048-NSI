@@ -181,7 +181,7 @@ def commencer_jeu(frame_menu):
     ajouter_nombre(matrice, len(matrice))
     ajouter_nombre(matrice, len(matrice))
     afficher_matrice(matrice, len(matrice))
-    fenetre.bind("<Key>", touche)
+    fenetre.bind("<KeyRealease>", touche)
     
 
 def jeu_terminer(tab, taille):
