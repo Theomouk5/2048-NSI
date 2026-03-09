@@ -195,7 +195,7 @@ def jeu_terminer(tab, taille):
                 return False
             if i < (taille-1) and tab[i][j]==tab[i+1][j]:
                 return False
-    messagebox.showinfo("ta perdue")
+    messagebox.showinfo("Tu a perdu")
     return True
         
 def afficher_matrice(matrice, taille):
