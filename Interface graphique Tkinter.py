@@ -1,6 +1,8 @@
 import random
 import tkinter as tk
+import sys
 from tkinter import messagebox
+from random import randint
 
 # Fonction qui sert à pousser tout nombre != 0 à droite
 def _verificationDroite(tab, ligne):
@@ -104,13 +106,13 @@ def verificationScore(tab):
             if tab[i][j] == 2048:
                 resultat = True
                 return resultat
+                
+if len(sys.argv) > 1 and len(sys.argv) < 3 and int(sys.argv[1]) > 0:
+    taille_argument = int(sys.argv[1])
+else:
+    taille_argument = 4
 
-matrice = [
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0]
-]
+matrice = [[0 for j in range(taille_argument)] for i in range(taille_argument)]
 
 def score():
     a=0
@@ -145,7 +147,10 @@ def ajouter_nombre(matrice, taille):
         if not case_vide:
             return
         ligne, colonne= random.choice(case_vide)
-        matrice[ligne][colonne]=2
+        if randint(0, 3) == 0:
+            matrice[ligne][colonne] = 4
+        else:
+            matrice[ligne][colonne] = 2
 
 
 def commencer_jeu(frame_menu):
