@@ -2,7 +2,6 @@ import random
 import tkinter as tk
 import sys
 from tkinter import messagebox
-from random import randint
 
 # Fonction qui sert à pousser tout nombre != 0 à droite
 def _verificationDroite(tab, ligne):
@@ -147,7 +146,7 @@ def ajouter_nombre(matrice, taille):
         if not case_vide:
             return
         ligne, colonne= random.choice(case_vide)
-        if randint(0, 3) == 0:
+        if random.randint(0, 3) == 0:
             matrice[ligne][colonne] = 4
         else:
             matrice[ligne][colonne] = 2
