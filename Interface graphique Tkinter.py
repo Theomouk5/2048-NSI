@@ -280,6 +280,31 @@ def creer_grille(parent_frame, taille):
             ligne_cases.append(case)
         grille.append(ligne_cases)
 
+#Elle permet de creer une grille sur l'interface graphique
+def creer_grille(parent_frame, taille):
+    global grille, score_label
+    grille = []
+    score_label = tk.Label(fenetre, text="Score : 0", font=("Arial",16))
+    score_label.pack(pady=5)
+    for ligne in range(taille):
+        ligne_cases = []
+        for colonne in range(taille):
+            case = tk.Label(
+                parent_frame,
+                text="",
+                width=6,
+                height=3,
+                font=("Arial", 24),
+                borderwidth=4,
+                relief="solid",
+                bg="#cdc1b4",
+                fg="#3c3a32"
+
+            )
+            case.grid(row=ligne, column=colonne, padx=5, pady=5)
+            ligne_cases.append(case)
+        grille.append(ligne_cases)
+
 # Création de la fenêtre principale du 2048
 fenetre = tk.Tk()
 fenetre.title("2048")  
@@ -300,7 +325,7 @@ btn_jouer = tk.Button(menu_accueil, text="Jouer", font=("Arial", 24), command=la
 btn_jouer.pack(pady=10)
 
 # Bouton pour quitter l'application directement depuis le menu
-btn_quitter = tk.Button(menu_accueil, text="Quitter", font=("Arial", 24), command=fenetre.destroy)
+btn_quitter = tk.Button(menu_accueil, text="Quitter", font=("Arial", 24), command=lambda:fenetre.destroy)
 btn_quitter.pack(pady=10)
 
 # Lancement de la boucle principale de l'interface graphique
