@@ -106,6 +106,7 @@ def verificationScore(tab):
                 resultat = True
                 return resultat
                 
+# Permet de changer la taille de la matrice dans la conslole au lancement
 if len(sys.argv) > 1 and len(sys.argv) < 3 and int(sys.argv[1]) > 0:
     taille_argument = int(sys.argv[1])
 else:
@@ -113,6 +114,7 @@ else:
 
 matrice = [[0 for j in range(taille_argument)] for i in range(taille_argument)]
 
+#additionne toutes les valeur de la matrice pour définir le score
 def score():
     a=0
     for i in range(len(matrice)):
@@ -120,6 +122,7 @@ def score():
             a=a+matrice[i][j]
     return a
 
+#définition des touches utilisable pour le jeu
 def touche(event):
     if event.keysym=="Right":
         additionnerDroite(matrice) 
@@ -129,6 +132,8 @@ def touche(event):
         additionnerHaut(matrice)
     elif event.keysym=="Down":
         additionnerBas(matrice)
+    else:
+        return
     
     ajouter_nombre(matrice, len(matrice))
     afficher_matrice(matrice, len(matrice))
@@ -137,6 +142,7 @@ def touche(event):
     if jeu_terminer(matrice, len(matrice)):
         return
 
+#Ajoute un nombre 2 ou 4 à la matrice
 def ajouter_nombre(matrice, taille):
         case_vide=[]
         for i in range(taille):
@@ -151,7 +157,7 @@ def ajouter_nombre(matrice, taille):
         else:
             matrice[ligne][colonne] = 2
 
-
+#Regroupe toutes les fonction pour commencer le jeu
 def commencer_jeu(frame_menu):
     global frame_grille
     frame_menu.destroy()   
@@ -187,7 +193,7 @@ def commencer_jeu(frame_menu):
     afficher_matrice(matrice, len(matrice))
     fenetre.bind("<KeyRelease>", touche)
     
-
+#Si aucun mouvement n'est possible envoie un message de défaite
 def jeu_terminer(tab, taille):
     for i in range(taille):
         for j in range(taille):
@@ -201,7 +207,8 @@ def jeu_terminer(tab, taille):
                 return False
     messagebox.showinfo("Tu a perdu")
     return True
-        
+
+#Affiche la matrice
 def afficher_matrice(matrice, taille):
     for i in range(taille):
         for j in range(taille):
@@ -216,7 +223,8 @@ def afficher_matrice(matrice, taille):
                     if valeur == 2**k:
                         grille[i][j]["bg"]=couleur_liste[k]
     score_label.config(text="Score : " + str(score()))
-            
+
+#Recommence avec une nouvelle matrice
 def nouvelle_partie():
     for i in range(len(matrice)):
         for j in range(len(matrice)):
@@ -225,6 +233,7 @@ def nouvelle_partie():
     ajouter_nombre(matrice, len(matrice))
     afficher_matrice(matrice, len(matrice))
 
+#Sert a quitter le jeu
 def quitter():
     fenetre.destroy()
 
@@ -244,7 +253,7 @@ couleur_liste = [
     "#68F527"
 ]
 
-
+#Elle permet de creer une grille sur l'interface graphique
 def creer_grille(parent_frame, taille):
     global grille, score_label
     grille = []
