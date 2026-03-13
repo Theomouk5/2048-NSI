@@ -104,6 +104,7 @@ def verificationScore(tab):
         for j in range(len(tab[i])):
             if tab[i][j] == 2048:
                 resultat = True
+                messagebox.showinfo("Tu a gagné")
                 return resultat
                 
 # Permet de changer la taille de la matrice dans la conslole au lancement
@@ -195,6 +196,7 @@ def commencer_jeu(frame_menu):
     
 #Si aucun mouvement n'est possible envoie un message de défaite
 def jeu_terminer(tab, taille):
+    verificationScore(matrice)
     for i in range(taille):
         for j in range(taille):
             if tab[i][j]==0:
