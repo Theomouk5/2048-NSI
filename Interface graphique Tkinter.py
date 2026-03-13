@@ -280,21 +280,28 @@ def creer_grille(parent_frame, taille):
             ligne_cases.append(case)
         grille.append(ligne_cases)
 
+# Création de la fenêtre principale du 2048
 fenetre = tk.Tk()
-fenetre.title("2048")
-barre_bouton=tk.Frame(fenetre)
+fenetre.title("2048")  
 
+# Création du cadre pour la barre de boutons (Nouvelle partie et Quitter)
+barre_bouton = tk.Frame(fenetre)
 
+# Création du cadre du menu d'accueil centré dans la fenêtre
 menu_accueil = tk.Frame(fenetre)
 menu_accueil.pack(expand=True)
 
+# Titre principal affiché sur le menu d'accueil
 titre = tk.Label(menu_accueil, text="2048", font=("Arial", 48))
 titre.pack(pady=20)
 
-btn_jouer = tk.Button(menu_accueil, text="Jouer", font=("Arial", 24),command=lambda: commencer_jeu(menu_accueil))
+# Bouton pour lancer la partie appelle commencer_jeu() en détruisant le menu
+btn_jouer = tk.Button(menu_accueil, text="Jouer", font=("Arial", 24), command=lambda: commencer_jeu(menu_accueil))
 btn_jouer.pack(pady=10)
 
-btn_quitter = tk.Button(menu_accueil, text="Quitter", font=("Arial", 24),command=fenetre.destroy)
+# Bouton pour quitter l'application directement depuis le menu
+btn_quitter = tk.Button(menu_accueil, text="Quitter", font=("Arial", 24), command=fenetre.destroy)
 btn_quitter.pack(pady=10)
 
-fenetre.mainloop()   
+# Lancement de la boucle principale de l'interface graphique
+fenetre.mainloop()
